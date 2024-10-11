@@ -1,0 +1,9 @@
+SELECT FLOOR(PRICE/10000) * 10000 AS PRICE_GROUP, COUNT(*) AS PRODUCTS
+FROM PRODUCT
+GROUP BY 1
+ORDER BY 1
+
+/* 
+10000 단위로 GROUP을 묶을 때에는, 단위를 다누고 버림처리(FLOOR)하여 다시 단위를 곱해준다.
+GROUP BY로 묶어줘야 COUNT할때 그룹별로 셀 수 있음을 유의.
+*/
