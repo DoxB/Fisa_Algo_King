@@ -1,0 +1,20 @@
+WITH SUB AS (
+    SELECT 
+        CAR_ID, START_DATE, END_DATE,
+        CASE
+            WHEN START_DATE <= DATE_FORMAT('2022-10-16', '%Y-%m-%d') AND
+                END_DATE >= DATE_FORMAT('2022-10-16', '%Y-%m-%d') THEN 1
+            ELSE 0
+        END AS AVAL
+    FROM CAR_RENTAL_COMPANY_RENTAL_HISTORY
+)
+
+SELECT 
+    CAR_ID,
+    CASE
+        WHEN SUM(AVAL) >= 1 THEN '대여중'
+        ELSE '대여 가능'
+    END AS AVAILABILITY
+FROM SUB
+GROUP BY CAR_ID
+ORDER BY CAR_ID DESC;
